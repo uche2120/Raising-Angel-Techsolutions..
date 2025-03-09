@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Raising Angel Techsolutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Simple gallery styles */
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: #f4f7f6; }
+        .gallery-container { padding: 60px 20px; max-width: 1200px; margin: auto; }
+        .gallery-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 40px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { overflow: hidden; border-radius: 10px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .gallery-item img { width: 100%; height: auto; display: block; }
+        .gallery-item:hover { transform: scale(1.05); box-shadow: 0 15px 25px rgba(0,0,0,0.3); }
+        .back-btn { display: block; text-align: center; margin: 40px 0; }
+        .back-btn a { padding: 12px 24px; background: #203a43; color: #fff; border-radius: 5px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Raising Angel Techsolutions</div>
+            <button class="mobile-nav-toggle">
+                <!-- Mobile nav icon here -->
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#packages">Solutions</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <button class="contact-btn"><a href="https://wa.me/2348107482979" target="_blank">Schedule a Consultation</a></button>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="gallery-container">
+        <h2 class="gallery-title">Our Works</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Droplets-CCTV-Pricing-and-cost-in-Port-Harcourt-wifi-ptz-channel-system-8-channel-cctv-artillery-gra.jpg" alt="Project 1">
+            </div>
+            <div class="gallery-item">
+                <img src="qWhatsApp Image 2025-02-28 at 16.58.56_22aed110.jpg" alt="Project 2">
+            </div>
+            <div class="gallery-item">
+                <img src="oWhatsApp Image 2025-02-28 at 16.58.55_98ce0ffc.jpg" alt="Project 3">
+            </div>
+            <div class="gallery-item">
+                <img src="v2436080822.jpg" alt="Project 4">
+            </div>
+            <div class="gallery-item">
+                <img src="ppWhatsApp Image 2025-02-28 at 18.44.52_dc97c333.jpg" alt="Project 5">
+            </div>
+            <div class="gallery-item">
+                <img src="lWhatsApp Image 2025-02-28 at 16.58.56_6e91af1d.jpg" alt="Project 5">
+            </div>
+            <div class="gallery-item">
+                <img src="b2WhatsApp Image 2025-02-28 at 18.44.56_01d80e1f.jpg" alt="Project 5">
+            </div>
+            <div class="gallery-item">
+                <img src="uImage 2025-02-28 at 18.50.43_c712e80e.jpg" alt="Project 5">
+            </div>
+            <div class="gallery-item">
+                <img src="60WhatsApp Image 2025-03-01 at 15.14.44_74027fb7.jpg" alt="Project 5">
+            </div>
+        </div>
+        <div class="back-btn">
+            <a href="index.html">Back to Home</a>
+        </div>
+    </section>
+</body>
+</html>
