@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raising Angel Security Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="shortcut icon" href="w20250309_205238.png" type="image/x-icon">
+    <style>
+        /* ===== ULTIMATE RESPONSIVE CHAT ===== */
+        :root {
+            --primary: #25D366; /* WhatsApp green */
+            --primary-dark: #128C7E;
+            --security-blue: #2962FF;
+            --automation-purple: #7B1FA2;
+            --solar-orange: #FF6D00;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg: #f5f7fa;
+            --message-bg: #ffffff;
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 420px;
+            height: 90vh;
+            max-height: 700px;
+            background: var(--message-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Header */
+        .chat-header {
+            padding: 16px 20px;
+            background: var(--message-bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(0,0,0,0.05);
+        }
+
+        .brand-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-btn:hover {
+            background: #f5f5f5;
+            color: var(--text);
+        }
+
+        /* Messages */
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            max-width: 85%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+        }
+
+        .user-message {
+            align-self: flex-end;
+        }
+
+        .message-content {
+            padding: 12px 16px;
+            line-height: 1.5;
+            font-size: 14.5px;
+            border-radius: 18px;
+        }
+
+        .bot-message .message-content {
+            background: #f0f7ff;
+            color: var(--text);
+            border-top-left-radius: 4px;
+        }
+
+        .user-message .message-content {
+            background: var(--primary);
+            color: white;
+            border-top-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: var(--text-light);
+            display: block;
+            text-align: right;
+            margin-top: 6px;
+        }
+
+        .user-message .message-time {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .quick-action {
+            background: rgba(37, 211, 102, 0.1);
+            color: var(--primary-dark);
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            border-radius: 16px;
+            padding: 8px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .security-action {
+            background: rgba(41, 98, 255, 0.1);
+            color: var(--security-blue);
+            border: 1px solid rgba(41, 98, 255, 0.2);
+        }
+
+        .automation-action {
+            background: rgba(123, 31, 162, 0.1);
+            color: var(--automation-purple);
+            border: 1px solid rgba(123, 31, 162, 0.2);
+        }
+
+        .solar-action {
+            background: rgba(255, 109, 0, 0.1);
+            color: var(--solar-orange);
+            border: 1px solid rgba(255, 109, 0, 0.2);
+        }
+
+        .quick-action:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .security-action:hover {
+            background: var(--security-blue);
+        }
+
+        .automation-action:hover {
+            background: var(--automation-purple);
+        }
+
+        .solar-action:hover {
+            background: var(--solar-orange);
+        }
+
+        /* Contact Options */
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .contact-btn {
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .contact-btn i {
+            font-size: 20px;
+        }
+
+        .contact-btn.whatsapp { background: var(--primary); }
+        .contact-btn.facebook { background: #4267B2; }
+        .contact-btn.instagram { background: #E1306C; }
+        .contact-btn.twitter { background: #1DA1F2; }
+        .contact-btn.email { background: #777; }
+        .contact-btn.phone { background: #4CAF50; }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Product Cards */
+        .product-cards {
+            display: grid;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .product-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.2s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-card h4 {
+            color: var(--text);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .product-card p {
+            color: var(--text-light);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .product-card .price {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .security-card {
+            border-left: 3px solid var(--security-blue);
+        }
+
+        .automation-card {
+            border-left: 3px solid var(--automation-purple);
+        }
+
+        .solar-card {
+            border-left: 3px solid var(--solar-orange);
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 16px;
+            border-top: 1px solid var(--border);
+            background: var(--message-bg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+        }
+
+        #user-input {
+            width: 100%;
+            padding: 14px 50px 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 14.5px;
+            outline: none;
+            transition: all 0.2s;
+            background: #f9f9f9;
+        }
+
+        #user-input:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+        }
+
+        #send-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #send-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 6px;
+            padding: 12px 16px;
+            background: #f0f7ff;
+            border-radius: 18px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #a0c5e8;
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Home Button */
+        .home-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .home-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .chat-container {
+                height: 100vh;
+                max-height: none;
+                border-radius: 0;
+                border: none;
+            }
+            
+            .contact-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .home-btn {
+                width: 48px;
+                height: 48px;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .messages {
+                padding: 15px;
+            }
+            
+            .message-content {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            
+            .quick-actions {
+                gap: 6px;
+            }
+            
+            .quick-action {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="brand">
+                <img src="tu20250308_222643.png" alt="Logo" class="brand-logo">
+                <div class="brand-info">
+                    <h3>Raising Angel Security</h3>
+                    <div class="status">
+                        <span class="status-dot"></span>
+                        <span>Online now</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="minimize-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="header-btn" id="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages" id="chat-messages">
+            <!-- Initial Message -->
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hello! 👋 I'm your Raising Angel Security assistant.</p>
+                    <p>I specialize in CCTV, Home Automation, and Solar solutions. How can I help you today?</p>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action security-action" data-option="cctv">
+                        <i class="fas fa-video"></i> CCTV
+                    </button>
+                    <button class="quick-action automation-action" data-option="automation">
+                        <i class="fas fa-home"></i> Automation
+                    </button>
+                    <button class="quick-action solar-action" data-option="solar">
+                        <i class="fas fa-solar-panel"></i> Solar
+                    </button>
+                </div>
+                <span class="message-time">Just now</span>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+                <button id="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Home Button -->
+    <button class="home-btn" id="home-btn" title="Back to Home">
+        <i class="fas fa-home"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const homeBtn = document.getElementById('home-btn');
+            const minimizeBtn = document.getElementById('minimize-btn');
+            const closeBtn = document.getElementById('close-btn');
+
+            // Contact Information
+            const contactInfo = {
+                whatsapp: {
+                    number: '2348107482979',
+                    url: 'https://wa.me/2348107482979',
+                    label: 'WhatsApp'
+                },
+                facebook: {
+                    url: 'https://facebook.com/yourpage',
+                    label: 'Facebook'
+                },
+                instagram: {
+                    url: 'https://instagram.com/yourprofile',
+                    label: 'Instagram'
+                },
+                twitter: {
+                    url: 'https://twitter.com/yourhandle',
+                    label: 'Twitter'
+                },
+                email: {
+                    address: 'info@raisingangel.com',
+                    url: 'mailto:info@raisingangel.com',
+                    label: 'Email'
+                },
+                phone: {
+                    number: '+234 810 748 2979',
+                    url: 'tel:+2348107482979',
+                    label: 'Call Us'
+                }
+            };
+
+            // Product Database
+            const products = {
+                cctv: [
+                    {
+                        name: "4K Ultra HD Camera",
+                        description: "8MP resolution with night vision up to 30m, weatherproof IP66 rating",
+                        price: "₦65,000"
+                    },
+                    {
+                        name: "Dome Camera",
+                        description: "Discreet 5MP dome camera with 360° rotation and motion detection",
+                        price: "₦45,000"
+                    },
+                    {
+                        name: "PTZ Camera",
+                        description: "Pan-Tilt-Zoom camera with 20x optical zoom and auto-tracking",
+                        price: "₦120,000"
+                    },
+                    {
+                        name: "4-Channel NVR Kit",
+                        description: "Complete kit with 4 cameras, 1TB storage, and mobile app",
+                        price: "₦220,000"
+                    }
+                ],
+                automation: [
+                    {
+                        name: "Smart Door Lock",
+                        description: "Fingerprint, PIN, and mobile app control with activity logs",
+                        price: "₦85,000"
+                    },
+                    {
+                        name: "Smart Lighting System",
+                        description: "Control lights remotely with voice commands and scheduling",
+                        price: "₦65,000"
+                    },
+                    {
+                        name: "Smart Thermostat",
+                        description: "Automate your AC and save energy with smart scheduling",
+                        price: "₦75,000"
+                    },
+                    {
+                        name: "Whole Home Automation",
+                        description: "Complete package for lights, security, and appliances",
+                        price: "₦350,000"
+                    }
+                ],
+                solar: [
+                    {
+                        name: "1KVA Solar System",
+                        description: "Basic system with 2 batteries, 4 panels, and inverter",
+                        price: "₦450,000"
+                    },
+                    {
+                        name: "2.5KVA Solar System",
+                        description: "Mid-range system for 3-4 bedroom homes",
+                        price: "₦850,000"
+                    },
+                    {
+                        name: "5KVA Solar System",
+                        description: "Complete off-grid solution for large homes",
+                        price: "₦1,500,000"
+                    },
+                    {
+                        name: "Solar Water Heater",
+                        description: "200L capacity with temperature control",
+                        price: "₦280,000"
+                    }
+                ]
+            };
+
+            // Initialize
+            let isTyping = false;
+            function init() {
+                setupEventListeners();
+            }
+
+            // Setup event listeners
+            function setupEventListeners() {
+                // Send message
+                sendBtn.addEventListener('click', sendMessage);
+                userInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+
+                // Navigation
+                homeBtn.addEventListener('click', () => {
+                    window.location.href = 'index.html';
+                });
+
+                minimizeBtn.addEventListener('click', () => {
+                    window.history.back();
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    window.location.href = 'index.html';
+                });
+
+                // Quick actions
+                document.querySelectorAll('.quick-action').forEach(btn => {
+                    btn.addEventListener('click', handleQuickAction);
+                });
+            }
+
+            // Send message handler
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (!message || isTyping) return;
+
+                addMessage(message, 'user');
+                userInput.value = '';
+                showTyping();
+                isTyping = true;
+
+                setTimeout(() => {
+                    removeTyping();
+                    const response = getBotResponse(message);
+                    addMessage(response.text, 'bot');
+                    
+                    if (response.actions) {
+                        addQuickActions(response.actions);
+                    }
+                    
+                    if (response.contactOptions) {
+                        addContactOptions(response.contactOptions);
+                    }
+                    
+                    if (response.products) {
+                        addProductCards(response.products);
+                    }
+                    
+                    isTyping = false;
+                }, 800 + Math.random() * 800);
+            }
+
+            // Add message to chat
+            function addMessage(text, sender) {
+                const now = new Date();
+                const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${sender}-message`;
+                msgDiv.innerHTML = `
+                    <div class="message-content">${formatText(text)}</div>
+                    <span class="message-time">${time}</span>
+                `;
+
+                chatMessages.appendChild(msgDiv);
+                scrollToBottom();
+            }
+
+            // Format message text
+            function formatText(text) {
+                // Convert URLs to links
+                text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color: inherit; text-decoration: underline;">$1</a>');
+                // Convert line breaks
+                return text.replace(/\n/g, '<br>');
+            }
+
+            // Show typing indicator
+            function showTyping() {
+                const typing = document.createElement('div');
+                typing.className = 'message bot-message typing-indicator';
+                typing.id = 'typing-indicator';
+                typing.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatMessages.appendChild(typing);
+                scrollToBottom();
+            }
+
+            // Remove typing indicator
+            function removeTyping() {
+                const typing = document.getElementById('typing-indicator');
+                if (typing) typing.remove();
+            }
+
+            // Scroll to bottom of messages
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Handle quick actions
+            function handleQuickAction(e) {
+                const button = e.currentTarget;
+                const option = button.dataset.option;
+                const text = button.textContent.trim();
+                
+                addMessage(text, 'user');
+                showTyping();
+                isTyping = true;
+
+                setTimeout(() => {
+                    removeTyping();
+                    const response = getBotResponse(option);
+                    addMessage(response.text, 'bot');
+                    
+                    if (response.actions) {
+                        addQuickActions(response.actions);
+                    }
+                    
+                    if (response.contactOptions) {
+                        addContactOptions(response.contactOptions);
+                    }
+                    
+                    if (response.products) {
+                        addProductCards(response.products);
+                    }
+                    
+                    isTyping = false;
+                }, 800);
+            }
+
+            // Add quick actions
+            function addQuickActions(actions) {
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'quick-actions';
+
+                actions.forEach(action => {
+                    const button = document.createElement('button');
+                    button.className = `quick-action ${action.class || ''}`;
+                    button.innerHTML = action.icon ? `<i class="${action.icon}"></i> ${action.text}` : action.text;
+                    button.dataset.option = action.value;
+                    button.addEventListener('click', handleQuickAction);
+                    actionsDiv.appendChild(button);
+                });
+
+                const container = document.createElement('div');
+                container.className = 'message bot-message';
+                container.appendChild(actionsDiv);
+                chatMessages.appendChild(container);
+                scrollToBottom();
+            }
+
+            // Add contact options
+            function addContactOptions(options) {
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'contact-options';
+
+                options.forEach(option => {
+                    const contact = contactInfo[option];
+                    const btn = document.createElement('div');
+                    btn.className = `contact-btn ${option}`;
+                    btn.innerHTML = `
+                        <i class="fab fa-${option === 'phone' ? 'phone-alt' : option === 'email' ? 'envelope' : option}"></i>
+                        <span>${contact.label}</span>
+                    `;
+                    btn.addEventListener('click', () => {
+                        window.open(contact.url, '_blank');
+                    });
+                    optionsDiv.appendChild(btn);
+                });
+
+                const container = document.createElement('div');
+                container.className = 'message bot-message';
+                container.appendChild(optionsDiv);
+                chatMessages.appendChild(container);
+                scrollToBottom();
+            }
+
+            // Add product cards
+            function addProductCards(productType) {
+                const productList = products[productType];
+                const cardsDiv = document.createElement('div');
+                cardsDiv.className = 'product-cards';
+
+                productList.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = `product-card ${productType}-card`;
+                    card.innerHTML = `
+                        <h4>${product.name}</h4>
+                        <p>${product.description}</p>
+                        <div class="price">${product.price}</div>
+                    `;
+                    cardsDiv.appendChild(card);
+                });
+
+                const container = document.createElement('div');
+                container.className = 'message bot-message';
+                container.appendChild(cardsDiv);
+                
+                // Add contact option after products
+                const contactText = document.createElement('div');
+                contactText.className = 'message-content';
+                contactText.innerHTML = '<p>Interested in any of these? Contact us for installation:</p>';
+                container.appendChild(contactText);
+                
+                const contactDiv = document.createElement('div');
+                contactDiv.className = 'contact-options';
+                
+                const whatsappBtn = document.createElement('div');
+                whatsappBtn.className = 'contact-btn whatsapp';
+                whatsappBtn.innerHTML = `
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat on WhatsApp</span>
+                `;
+                whatsappBtn.addEventListener('click', () => {
+                    window.open(contactInfo.whatsapp.url, '_blank');
+                });
+                contactDiv.appendChild(whatsappBtn);
+                
+                const callBtn = document.createElement('div');
+                callBtn.className = 'contact-btn phone';
+                callBtn.innerHTML = `
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Call Us</span>
+                `;
+                callBtn.addEventListener('click', () => {
+                    window.open(contactInfo.phone.url, '_blank');
+                });
+                contactDiv.appendChild(callBtn);
+                
+                container.appendChild(contactDiv);
+                chatMessages.appendChild(container);
+                scrollToBottom();
+            }
+
+            // Generate bot response
+            function getBotResponse(input) {
+                input = input.toLowerCase().trim();
+                
+                const responses = {
+                    default: {
+                        text: "I specialize in:\n\n📹 <b>CCTV Systems</b> - Complete surveillance solutions\n🏠 <b>Home Automation</b> - Smart control of your home\n☀️ <b>Solar Power</b> - Reliable energy solutions\n\nWhat would you like to know about?",
+                        actions: [
+                            { text: "CCTV Systems", value: "cctv", icon: "fas fa-video", class: "security-action" },
+                            { text: "Home Automation", value: "automation", icon: "fas fa-home", class: "automation-action" },
+                            { text: "Solar Power", value: "solar", icon: "fas fa-solar-panel", class: "solar-action" }
+                        ]
+                    },
+                    cctv: {
+                        text: "📹 <b>CCTV Surveillance Solutions</b>\n\nWe provide complete security camera systems with:\n• 4K Ultra HD cameras\n• Night vision capabilities\n• Weatherproof outdoor cameras\n• Mobile app monitoring\n• Professional installation\n\nHere are our popular CCTV products:",
+                        products: "cctv"
+                    },
+                    automation: {
+                        text: "🏠 <b>Smart Home Automation</b>\n\nTransform your home with:\n• Smart lighting control\n• Automated door locks\n• Climate control systems\n• Voice command integration\n• Energy saving solutions\n\nOur automation products include:",
+                        products: "automation"
+                    },
+                    solar: {
+                        text: "☀️ <b>Solar Power Solutions</b>\n\nReliable solar systems for:\n• Complete home power\n• Backup power solutions\n• Solar water heating\n• Energy independence\n• Long-term cost savings\n\nCheck out our solar offerings:",
+                        products: "solar"
+                    },
+                    "cctv installation": {
+                        text: "Our CCTV installation service includes:\n\n1. Site survey to determine optimal camera positions\n2. Professional installation of cameras and DVR/NVR\n3. Network configuration for remote viewing\n4. Mobile app setup\n5. Training on system usage\n\nTypical installation takes 4-8 hours depending on system size."
+                    },
+                    "automation setup": {
+                        text: "Smart home automation setup includes:\n\n1. Consultation to identify your needs\n2. Installation of smart devices\n3. Network configuration\n4. Mobile app setup\n5. Voice assistant integration (Google/Alexa)\n6. Custom automation routines\n\nWe support all major smart home protocols."
+                    },
+                    "solar installation": {
+                        text: "Our solar installation process:\n\n1. Energy assessment of your property\n2. Custom system design\n3. High-quality equipment installation\n4. Battery bank setup (if included)\n5. Inverter and charge controller installation\n6. System testing and commissioning\n\nMost residential installations take 2-3 days."
+                    },
+                    contact: {
+                        text: "Choose how you'd like to contact us:",
+                        contactOptions: ['whatsapp', 'phone', 'email']
+                    },
+                    whatsapp: {
+                        text: "Opening WhatsApp chat..."
+                    }
+                };
+
+                // Special case for WhatsApp to redirect immediately
+                if (input === 'whatsapp') {
+                    window.location.href = contactInfo.whatsapp.url;
+                    return {
+                        text: "Redirecting to WhatsApp..."
+                    };
+                }
+
+                return responses[input] || responses['default'];
+            }
+
+            // Initialize the chat
+            init();
+        });
+    </script>
+</body>
+</html>
