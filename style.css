@@ -1,5 +1,4 @@
-/* Reset and Base Styles */
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -325,7 +324,7 @@ body {
 .vision-section {
     padding: 6rem 2rem;
     background: linear-gradient(to right, rgba(44, 62, 80, 0.95), rgba(52, 152, 219, 0.95)), 
-                url('your-background-image.jpg');
+                url('WhatsApp\ Image\ 2025-06-09\ at\ 14.54.25_b07518b6.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;

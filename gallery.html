@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Raising Angel Techsolutions is your trusted store for solar panels, CCTV, smart home gadgets, inverters, and more in Nigeria. Get fast delivery and top support." />
+  <meta name="keywords" content="solar panels Nigeria, buy inverter, smart home gadgets, CCTV camera Okija, home automation Nigeria, Raising Angel Techsolutions" />
+  <meta name="author" content="Raising Angel Techsolutions" />
+  <link rel="canonical" href="https://yourdomain.com/index.html" />
+  <title>Raising Angel Techsolutions | Solar, CCTV & Tech Gadgets</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- Social Sharing Preview -->
+  <meta property="og:title" content="Raising Angel Techsolutions - Solar, CCTV & Smart Gadgets" />
+  <meta property="og:description" content="Get top tech products delivered across Nigeria – solar panels, inverters, security, and more." />
+  <meta property="og:image" content="https://yourdomain.com/assets/og-thumbnail.jpg" />
+  <meta property="og:url" content="https://yourdomain.com/index.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Add your CSS and scripts below -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Raising Angel Techsolutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="shortcut icon" href="w20250309_205238.png" type="image/x-icon">
@@ -477,6 +495,719 @@
             }
         });
     </script>
+
+
+<!-- ===== COPY FROM HERE ===== -->
+<div id="ultimate-chatbot">
+  <!-- Toggle Button -->
+  <div class="chatbot-toggle" id="chatbot-toggle">
+    <i class="fas fa-robot"></i>
+    <span class="pulse-dot"></span>
+  </div>
+
+  <!-- Chat Window -->
+  <div class="chatbot-window" id="chatbot-window">
+    <!-- Header -->
+    <div class="chatbot-header">
+      <div class="chatbot-brand">
+        <img src="tu20250308_222643.png" alt="Logo" class="chatbot-logo">
+        <div>
+          <h3>Raising Angel Assistant</h3>
+          <div class="status">
+            <span class="status-dot"></span>
+            <span>Online now</span>
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-actions">
+        <button class="action-btn minimize-btn" id="minimize-chatbot">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button class="action-btn close-btn" id="close-chatbot">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="chatbot-messages" id="chatbot-messages">
+      <!-- Initial Message -->
+      <div class="message bot-message">
+        <div class="message-content">
+          <p>Hello! 👋 I'm your virtual assistant from <strong>Raising Angel Techsolutions</strong>.</p>
+          <p>How can I help you today?</p>
+        </div>
+        <div class="quick-options">
+          <button class="quick-option" data-option="products">
+            <i class="fas fa-box-open"></i> Our Products
+          </button>
+          <button class="quick-option" data-option="pricing">
+            <i class="fas fa-tag"></i> Pricing
+          </button>
+          <button class="quick-option" data-option="contact">
+            <i class="fas fa-headset"></i> Contact Support
+          </button>
+        </div>
+        <span class="message-time">Just now</span>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chatbot-input-area">
+      <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+        <button id="send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+      <div class="suggested-replies" id="suggested-replies"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Chatbot Variables */
+  :root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --accent-color: #2ecc71;
+    --whatsapp-color: #25D366;
+    --text-color: #333;
+    --light-text: #777;
+    --bg-color: #fff;
+    --message-bg: #f8f9fa;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Base Styles */
+  #ultimate-chatbot {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Toggle Button */
+  .chatbot-toggle {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+  }
+
+  .chatbot-toggle:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4);
+  }
+
+  .pulse-dot {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    border: 3px solid white;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    70% { transform: scale(1.5); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Chat Window */
+  .chatbot-window {
+    width: 380px;
+    height: 550px;
+    background: var(--bg-color);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .chatbot-window.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Header */
+  .chatbot-header {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .chatbot-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chatbot-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .chatbot-brand h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    margin-top: 3px;
+    opacity: 0.9;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .chatbot-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .close-btn:hover {
+    background: #ff6b6b;
+  }
+
+  /* Messages Area */
+  .chatbot-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--message-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #f1f1f1;
+  }
+
+  .chatbot-messages::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chatbot-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .chatbot-messages::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+  }
+
+  /* Messages */
+  .message {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    position: relative;
+    animation: fadeIn 0.4s ease;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .bot-message {
+    align-self: flex-start;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border-top-left-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .user-message {
+    align-self: flex-end;
+    background: var(--primary-color);
+    color: white;
+    border-top-right-radius: 5px;
+  }
+
+  .message-content p {
+    margin: 8px 0;
+  }
+
+  .message-content p:first-child {
+    margin-top: 0;
+  }
+
+  .message-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .message-time {
+    font-size: 11px;
+    color: var(--light-text);
+    display: block;
+    text-align: right;
+    margin-top: 8px;
+  }
+
+  .user-message .message-time {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Quick Options */
+  .quick-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .quick-option {
+    background: #f0f7ff;
+    color: var(--primary-color);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .quick-option:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .quick-option i {
+    font-size: 14px;
+  }
+
+  /* Input Area */
+  .chatbot-input-area {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  #user-input {
+    width: 100%;
+    padding: 14px 50px 14px 18px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+  }
+
+  #user-input:focus {
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+
+  #send-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #send-btn:hover {
+    background: #f0f7fd;
+    color: var(--secondary-color);
+  }
+
+  /* Suggested Replies */
+  .suggested-replies {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+  }
+
+  .suggested-reply {
+    background: #f1f8ff;
+    color: var(--primary-color);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 15px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .suggested-reply:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  /* Typing Indicator */
+  .typing-indicator {
+    display: flex;
+    padding: 12px 16px;
+    background: var(--bg-color);
+    border-radius: 18px;
+    align-self: flex-start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: fit-content;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 3px;
+    animation: typingAnimation 1.4s infinite ease-in-out;
+  }
+
+  .typing-dot:nth-child(1) { animation-delay: 0s; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingAnimation {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #ultimate-chatbot {
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .chatbot-window {
+      width: 90vw;
+      height: 70vh;
+      bottom: 70px;
+      right: 5vw;
+    }
+
+    .chatbot-toggle {
+      width: 55px;
+      height: 55px;
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const minimizeBtn = document.getElementById('minimize-chatbot');
+    const closeBtn = document.getElementById('close-chatbot');
+    const chatMessages = document.getElementById('chatbot-messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const suggestedReplies = document.getElementById('suggested-replies');
+
+    // Toggle Chat Window
+    chatbotToggle.addEventListener('click', () => {
+      chatbotWindow.classList.toggle('active');
+      document.querySelector('.pulse-dot').style.display = 'none';
+    });
+
+    minimizeBtn.addEventListener('click', () => {
+      chatbotWindow.classList.remove('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      chatbotWindow.classList.remove('active');
+    });
+
+    // Enhanced Response Database
+    const responseDatabase = {
+      // Greetings
+      hello: {
+        text: "Hello! 👋 How can I assist you with Raising Angel Techsolutions today?",
+        options: [
+          { text: "View Products", value: "products", icon: "fas fa-box-open" },
+          { text: "Get Support", value: "support", icon: "fas fa-headset" }
+        ]
+      },
+      hi: {
+        text: "Hi there! 😊 What can I help you with?",
+        options: [
+          { text: "Product Catalog", value: "products" },
+          { text: "Pricing Info", value: "pricing" }
+        ]
+      },
+      
+      // Products
+      products: {
+        text: "We specialize in:\n\n🔹 <strong>Smart Security Cameras</strong> (From ₦45,000)\n🔹 <strong>Home Automation Systems</strong>\n🔹 <strong>Access Control Solutions</strong>\n🔹 <strong>Solar Power Systems</strong>\n\nWhich solution interests you?",
+        options: [
+          { text: "Security Cameras", value: "cameras", icon: "fas fa-camera" },
+          { text: "Automation", value: "automation", icon: "fas fa-home" },
+          { text: "Solar Solutions", value: "solar", icon: "fas fa-solar-panel" }
+        ]
+      },
+      cameras: {
+        text: "Our <strong>Smart Security Cameras</strong> include:\n✔️ 1080p HD Resolution\n✔️ Night Vision\n✔️ Motion Detection Alerts\n✔️ Weatherproof Housing\n✔️ Mobile App Control\n\n<em>Prices start from ₦45,000</em>\n\nWould you like installation details?",
+        options: [
+          { text: "Installation Info", value: "installation" },
+          { text: "View More Products", value: "products" }
+        ]
+      },
+      automation: {
+        text: "Our <strong>Home Automation</strong> systems let you control:\n\n✔️ Lighting\n✔️ Security Systems\n✔️ Air Conditioning\n✔️ Appliances\n✔️ Smart Locks\n\nAll from your smartphone!",
+        options: [
+          { text: "Request Quote", value: "quote" },
+          { text: "Main Menu", value: "menu" }
+        ]
+      },
+      
+      // Pricing
+      pricing: {
+        text: "Our pricing structure:\n\n📷 <strong>Security Cameras</strong>: ₦45,000 - ₦150,000\n🏠 <strong>Automation Systems</strong>: ₦200,000+\n🔋 <strong>Solar Solutions</strong>: Custom quotes\n🔒 <strong>Installation</strong>: Starts at ₦25,000\n\nNeed a specific quote?",
+        options: [
+          { text: "Camera Quote", value: "camera_quote" },
+          { text: "Full System", value: "full_system" }
+        ]
+      },
+      
+      // Support
+      support: {
+        text: "For immediate assistance:\n\n📞 <strong>Call</strong>: +234 810 748 2979\n💬 <strong>WhatsApp</strong>: <a href='https://wa.me/2348107482979' target='_blank'>Click to Chat</a>\n📍 <strong>Office</strong>: Available on request\n\nHow else can I help?",
+        options: [
+          { text: "Product Help", value: "product_help" },
+          { text: "Main Menu", value: "menu" }
+        ]
+      },
+      
+      // Default
+      default: {
+        text: "I'm here to help with:\n\n• Product Information\n• Pricing Details\n• Technical Support\n• Installation Queries\n\nWhat would you like to know?",
+        options: [
+          { text: "Products", value: "products", icon: "fas fa-box-open" },
+          { text: "Contact Support", value: "support", icon: "fas fa-headset" }
+        ]
+      }
+    };
+
+    // Smart Response Generator
+    function getSmartResponse(input) {
+      input = input.toLowerCase().trim();
+      
+      // Check for keywords
+      if (/(hello|hi|hey)/i.test(input)) return responseDatabase.hello;
+      if (/(product|item|solution)/i.test(input)) return responseDatabase.products;
+      if (/(camera|security)/i.test(input)) return responseDatabase.cameras;
+      if (/(automation|smart home)/i.test(input)) return responseDatabase.automation;
+      if (/(price|cost|how much)/i.test(input)) return responseDatabase.pricing;
+      if (/(support|help|contact)/i.test(input)) return responseDatabase.support;
+      
+      return responseDatabase.default;
+    }
+
+    // Send Message Function
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      userInput.value = '';
+      showTyping();
+
+      setTimeout(() => {
+        removeTyping();
+        const response = getSmartResponse(message);
+        addMessage(response.text, 'bot');
+        
+        if (response.options) {
+          addQuickOptions(response.options);
+        }
+      }, 800 + Math.random() * 800);
+    }
+
+    // Add Message to Chat
+    function addMessage(text, sender) {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      messageDiv.innerHTML = `
+        <div class="message-content">${text.replace(/\n/g, '<br>')}</div>
+        <span class="message-time">${time}</span>
+      `;
+
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Show Typing Indicator
+    function showTyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator';
+      typingDiv.id = 'typing-indicator';
+      typingDiv.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatMessages.appendChild(typingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Remove Typing Indicator
+    function removeTyping() {
+      const typing = document.getElementById('typing-indicator');
+      if (typing) typing.remove();
+    }
+
+    // Add Quick Options
+    function addQuickOptions(options) {
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'quick-options';
+
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.className = 'quick-option';
+        if (option.icon) {
+          button.innerHTML = `<i class="${option.icon}"></i> ${option.text}`;
+        } else {
+          button.textContent = option.text;
+        }
+        button.dataset.option = option.value;
+        button.addEventListener('click', handleQuickOption);
+        optionsDiv.appendChild(button);
+      });
+
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message bot-message';
+      messageDiv.appendChild(optionsDiv);
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Handle Quick Option
+    function handleQuickOption(e) {
+      const option = e.currentTarget.dataset.option;
+      
+      if (option === 'support') {
+        addMessage("Contacting support...", 'user');
+        setTimeout(() => {
+          addMessage(responseDatabase.support.text, 'bot');
+          addQuickOptions(responseDatabase.support.options);
+        }, 1000);
+      } else {
+        addMessage(e.currentTarget.textContent, 'user');
+        showTyping();
+        
+        setTimeout(() => {
+          removeTyping();
+          const response = getSmartResponse(option);
+          addMessage(response.text, 'bot');
+          
+          if (response.options) {
+            addQuickOptions(response.options);
+          }
+        }, 800);
+      }
+    }
+
+    // Event Listeners
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Initial Quick Options
+    document.querySelectorAll('.quick-option').forEach(btn => {
+      btn.addEventListener('click', handleQuickOption);
+    });
+
+    // Auto-open after 5 seconds (optional)
+    setTimeout(() => {
+      if (!chatbotWindow.classList.contains('active')) {
+        chatbotWindow.classList.add('active');
+      }
+    }, 5000);
+  });
+</script>
+<!-- ===== END OF CHATBOT ===== -->
 </body>
 </html>
 
