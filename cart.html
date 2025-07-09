@@ -1,12 +1,8 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow" />
   <meta name="description" content="Raising Angel Techsolutions is your trusted store for solar panels, CCTV, smart home gadgets, inverters, and more in Nigeria. Get fast delivery and top support." />
   <meta name="keywords" content="solar panels Nigeria, buy inverter, smart home gadgets, CCTV camera Okija, home automation Nigeria, Raising Angel Techsolutions" />
   <meta name="author" content="Raising Angel Techsolutions" />
@@ -21,6 +17,17 @@
   <meta property="og:url" content="https://yourdomain.com/index.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <!-- Add your CSS and scripts below -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="w20250309_205238.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Raising Angel Techsolutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Raising Angel Techsolutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="shortcut icon" href="w20250309_205238.png" type="image/x-icon">
@@ -393,13 +400,18 @@
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            font-weight: 500;
         }
         
-        .product-rating {
-            color: #ffc107;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
+        /* Category color variations */
+        .category-cctv { background-color: #e3f2fd; color: #1976d2; }
+        .category-solar { background-color: #e8f5e9; color: #388e3c; }
+        .category-smart { background-color: #f3e5f5; color: #8e24aa; }
+        .category-automation { background-color: #fff3e0; color: #fb8c00; }
         
         .product-price {
             font-size: 1.3rem;
@@ -464,6 +476,31 @@
         .wishlist-btn:hover {
             background: #ff6b6b;
             color: white;
+        }
+        
+        /* Category filter buttons */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .category-filter {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .category-filter:hover, .category-filter.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
         }
         
         /* Cart Sidebar */
@@ -919,6 +956,15 @@
             <p class="section-subtitle">Explore our range of cutting-edge security and automation solutions for your home and business</p>
         </div>
         
+        <!-- Category filters with your requested categories -->
+        <div class="category-filters">
+            <button class="category-filter active" data-category="all">All Products</button>
+            <button class="category-filter" data-category="cctv">CCTV Cameras</button>
+            <button class="category-filter" data-category="solar">Solar</button>
+            <button class="category-filter" data-category="smart">Smart Look/Device</button>
+            <button class="category-filter" data-category="automation">Automation</button>
+        </div>
+        
         <div class="products-grid" id="products-grid"></div>
     </section>
 
@@ -1224,6 +1270,42 @@
                 customerLocationInput.value = '';
             });
             
+            // Helper function to format category names for display
+            function formatCategoryName(category) {
+                const names = {
+                    'cctv': 'CCTV Camera',
+                    'solar': 'Solar',
+                    'smart': 'Smart Device',
+                    'automation': 'Automation'
+                };
+                return names[category] || category;
+            }
+
+            // Set up category filter functionality
+            function setupCategoryFilters() {
+                const filters = document.querySelectorAll('.category-filter');
+                const products = document.querySelectorAll('.product-card');
+                
+                filters.forEach(filter => {
+                    filter.addEventListener('click', () => {
+                        // Update active state of filters
+                        filters.forEach(f => f.classList.remove('active'));
+                        filter.classList.add('active');
+                        
+                        const category = filter.dataset.category;
+                        
+                        // Filter products
+                        products.forEach(product => {
+                            if (category === 'all' || product.dataset.category === category) {
+                                product.style.display = 'block';
+                            } else {
+                                product.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+            
             // Load products from Firestore
             async function loadProducts() {
                 const productsGrid = document.getElementById('products-grid');
@@ -1242,6 +1324,11 @@
                         const product = doc.data();
                         const productCard = document.createElement('div');
                         productCard.className = 'product-card';
+                        productCard.dataset.category = product.category || 'uncategorized';
+                        
+                        // Determine category class for styling
+                        const categoryClass = product.category ? `category-${product.category}` : '';
+                        
                         productCard.innerHTML = `
                             <div class="product-image-container">
                                 <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
@@ -1252,6 +1339,7 @@
                             </div>
                             <div class="product-content">
                                 <h3 class="product-title">${product.name}</h3>
+                                ${product.category ? `<div class="product-category ${categoryClass}">${formatCategoryName(product.category)}</div>` : ''}
                                 <div class="product-price">₦${parseInt(product.price).toLocaleString()}</div>
                                 <p class="product-description">${product.description || 'Premium security product'}</p>
                                 <div class="product-actions">
@@ -1268,6 +1356,9 @@
                         productsGrid.appendChild(productCard);
                     });
 
+                    // Initialize category filtering
+                    setupCategoryFilters();
+                    
                     // Attach add-to-cart event listeners
                     document.querySelectorAll('.add-to-cart').forEach(button => {
                         button.addEventListener('click', () => {
