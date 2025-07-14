@@ -1,5 +1,4 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="robots" content="index, follow" />
@@ -664,24 +663,55 @@
         .checkout-btn {
             width: 100%;
             padding: 1rem;
-            background: #2ed573;
-            color: white;
+            background: linear-gradient(90deg, #25D366 60%, #128C7E 100%);
+            color: #fff;
             border: none;
             border-radius: 30px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
             margin-top: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
+            letter-spacing: 0.5px;
         }
         
-        .checkout-btn:hover {
-            background: #25b562;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.4);
+        .checkout-btn:hover, .checkout-btn:focus {
+            background: linear-gradient(90deg, #128C7E 60%, #25D366 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(18, 140, 126, 0.18);
+            outline: none;
+        }
+        
+        .whatsapp-icon {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkout-text {
+            font-size: 1.08rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        
+        @media (max-width: 576px) {
+            .checkout-btn {
+                font-size: 1rem;
+                padding: 0.8rem;
+                border-radius: 22px;
+                gap: 8px;
+            }
+            .whatsapp-icon {
+                font-size: 1.2rem;
+            }
+            .checkout-text {
+                font-size: 0.98rem;
+            }
         }
         
         /* Empty Cart Styling */
@@ -1018,7 +1048,8 @@
             </div>
             
             <button class="checkout-btn" id="checkout-btn">
-                <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
+                <span class="whatsapp-icon"><i class="fab fa-whatsapp"></i></span>
+                <span class="checkout-text">Checkout via WhatsApp</span>
             </button>
         </div>
     </div>
@@ -1029,6 +1060,14 @@
             <i class="fas fa-check"></i>
         </div>
         <div class="notification-text">Item added to cart</div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="image-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <img src="" alt="Product Image" class="modal-image" id="modal-image">
+        </div>
     </div>
 
     <!-- Firebase SDKs -->
@@ -1354,6 +1393,13 @@
                             </div>
                         `;
                         productsGrid.appendChild(productCard);
+
+                        // Attach view details event
+                        const viewBtn = productCard.querySelector('.view-product-btn');
+                        viewBtn.addEventListener('click', () => {
+                            modalImage.src = product.imageUrl;
+                            imageModal.classList.add('active');
+                        });
                     });
 
                     // Initialize category filtering
@@ -1404,6 +1450,22 @@
                 }
             }
 
+            // Modal logic
+            const imageModal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeModal = document.getElementById('close-modal');
+
+            closeModal.addEventListener('click', () => {
+                imageModal.classList.remove('active');
+            });
+
+            // Optional: close modal when clicking outside the image
+            imageModal.addEventListener('click', (e) => {
+                if (e.target === imageModal) {
+                    imageModal.classList.remove('active');
+                }
+            });
+            
             // Initialize the page
             loadProducts();
             updateCart();
